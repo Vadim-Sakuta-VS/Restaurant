@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: local('Open Sans'), local('OpenSans-Regular'),
+  url('../fonts/OpenSans-Regular.eot'),
+  url('../fonts/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/OpenSans-Regular.woff2') format('woff2'),
+  url('../fonts/OpenSans-Regular.woff') format('woff'),
+  url('../fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: local('Open Sans'), local('OpenSans-Bold'),
+  url('../fonts/OpenSans-Bold.eot'),
+  url('../fonts/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/OpenSans-Bold.woff2') format('woff2'),
+  url('../fonts/OpenSans-Bold.woff') format('woff'),
+  url('../fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Banny';
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: local('Banny'), local('Banny-BoldRound'),
+  url('../fonts/Banny-BoldRound.eot'),
+  url('../fonts/Banny-BoldRound.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Banny-BoldRound.woff2') format('woff2'),
+  url('../fonts/Banny-BoldRound.woff') format('woff'),
+  url('../fonts/Banny-BoldRound.ttf') format('truetype');
+}
