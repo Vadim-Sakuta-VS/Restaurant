@@ -1,1 +1,389 @@
 @import "fonts";
+@import "normalize";
+
+$ff-title: 'Banny', sans-serif;
+$ff-text: 'Open Sans', sans-serif;
+$fs-base: 18px;
+$color-primary: #000;
+$color-secondary: #fff;
+$color-tertiary: #333;
+$bg-color-el-primary: #E8C300;
+$bg-color-el-secondary: #E5E5E5;
+$bg-color-inverse: #242424;
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin flexbox-common($display, $justify-c, $align-i) {
+  display: $display;
+  justify-content: $justify-c;
+  align-items: $align-i;
+}
+
+@mixin position($pos, $top, $right, $bottom, $left) {
+  position: $pos;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin font($f-family, $f-size, $line-height, $f-weight) {
+  font-family: $f-family;
+  font-weight: $f-weight;
+  font-size: $f-size;
+  line-height: $line-height;
+}
+
+@function darker($color, $tone) {
+  $adjust: -16*$tone;
+  @return adjust-color($color, $red: $adjust, $green: $adjust, $blue: $adjust);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a, button, input, textarea {
+  outline: none;
+}
+
+body {
+  font-family: $ff-text;
+  font-size: $fs-base;
+  color: $color-primary;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.block-lines {
+  @include position(absolute, 0, null, null, 50%);
+  @include size(66%, 100%);
+  @include flexbox-common(flex, center, null);
+  transform: translateX(-50%);
+  border-left: 1px solid transparentize($color-secondary, .8);
+  border-right: 1px solid transparentize($color-secondary, .8);
+
+  &::before {
+    content: '';
+    @include size(1px, null);
+    background-color: transparentize($color-secondary, .8);
+  }
+}
+
+.btn {
+  display: inline-block;
+  @include size(null, 60px);
+  @include flexbox-common(inline-flex, center, center);
+  padding: 0 1em;
+  @include font(inherit, 12px, 20px, bold);
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $color-secondary;
+  border-radius: 5px;
+  transition: .3s;
+
+  &-transparent {
+    border: 1px solid transparentize($color-secondary, .5);
+
+    &:hover, &:focus {
+      color: $bg-color-el-primary;
+      border-color: transparentize($bg-color-el-primary, .8);
+      box-shadow: 0 0 10px 1px $bg-color-el-primary inset;
+    }
+  }
+
+  &-fill {
+    background-color: $bg-color-el-primary;
+    border-color: $bg-color-el-primary;
+
+    &:hover, &:focus {
+      box-shadow: 0 0 10px 1px $bg-color-el-primary;
+    }
+  }
+}
+
+.work-time {
+  @include font(null, 12px, 12px, bold);
+}
+
+.title-mini {
+  @include font(null, 12px, 14px, bold);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.title-main {
+  @include font($ff-title, 96px, null, bold);
+  text-transform: uppercase;
+}
+
+.separator-line {
+  width: 60px;
+  height: 5px;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-color: $bg-color-el-primary;
+}
+
+.social-link {
+  @include size(60px, 60px);
+  @include flexbox-common(flex, center, center);
+  border: 1px solid transparentize($color-secondary, .8);
+  border-radius: 50%;
+  transition: .3s;
+
+  &:hover, &:focus {
+    border-color: transparentize($bg-color-el-primary, .8);
+    box-shadow: 0 0 10px 1px $bg-color-el-primary inset;
+  }
+
+  &:hover .social-link__icon,
+  &:focus .social-link__icon{
+    fill: $bg-color-el-primary;
+  }
+
+  &__icon {
+    fill: $color-secondary;
+    transition: inherit;
+
+    &-facebook {
+      @include size(12px, 21px);
+    }
+
+    &-twitter {
+      @include size(20px, 18px);
+    }
+
+    &-instagram {
+      @include size(18px, 18px);
+    }
+  }
+}
+
+.hamburger-toggle {
+  display: none;
+
+  &__el {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: $color-secondary;
+
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.header {
+  height: 100vh;
+  background: no-repeat center center / cover url("../images/header-bg.png") #242424;
+  color: $color-secondary;
+
+  &__container {
+    @include size(null, 100%);
+    overflow: hidden;
+  }
+
+  &__top {
+    @include position(relative, null, null, null, null);
+    z-index: 2;
+  }
+
+  &__bottom {
+    @include position(relative, null, null, null, null);
+    @include size(null, calc(100% - 101px));
+    @include flexbox-common(flex, null, center);
+
+    &-block-lines::before {
+      display: none;
+    }
+
+    &-content {
+      @include position(relative, null, null, null, null);
+      @include flexbox-common(flex, space-between, center);
+      flex-basis: 100%;
+      z-index: 1;
+    }
+
+    &-socials-item:not(:last-child){
+      margin-bottom: 20px;
+    }
+  }
+
+  &__promo {
+    @include position(absolute, 3%, null, null, 50%);
+    @include size(78%, 100%);
+    transform: translateX(-50%);
+
+    &-separator-line {
+      margin-bottom: 31px;
+    }
+
+    &-links{
+      max-width: 440px;
+      @include flexbox-common(flex, space-between, null);
+      margin: 0 auto;
+    }
+  }
+
+  &__title-mini {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  &__title-main {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .header__btn-book-table,
+  .header__btn-explore {
+    flex-basis: 200px;
+    max-width: 200px;
+  }
+
+  &__logo-wrap {
+    @include position(absolute, 3%, null, null, 50%);
+    transform: translateX(-50%);
+    padding: 24px 35px 18px 35px;
+
+    &::before, &::after {
+      content: '';
+      @include size(1000%, 1px);
+      transform: translateY(-50%);
+      background-color: transparentize($color-secondary, .8);
+    }
+
+    &::before {
+      @include position(absolute, 50%, 0, 0, 100%);
+    }
+
+    &::after {
+      @include position(absolute, 50%, 100%, null, null);
+    }
+
+    .logo-link:focus {
+      outline: 1px solid $bg-color-el-primary;
+    }
+  }
+
+  .menu {
+    display: flex;
+    @include size(null, 100px);
+
+    &__item {
+      flex-basis: 133px;
+
+      &:nth-child(4) {
+        margin-right: 110px;
+      }
+
+      &:nth-child(5) {
+        margin-left: 110px;
+      }
+    }
+
+    &-link {
+      @include size(100%, 100%);
+      @include flexbox-common(flex, center, center);
+      @include font(null, 12px, 18px, bold);
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $color-secondary;
+      transition: .3s;
+
+      &:hover, &:focus {
+        background-color: $bg-color-el-primary;
+      }
+    }
+  }
+
+  &__work-time {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .down-link-wrap {
+    @include size(60px, 60px);
+    @include flexbox-common(flex, center, center);
+    border: 1px solid transparentize($color-secondary, .8);
+    border-radius: 50%;
+    animation: border-color-changing 10s linear 3s infinite;
+
+    .down-link {
+      @include position(relative, null, null, null, null);
+      @include size(40px, 40px);
+      background-color: $color-secondary;
+      border-radius: inherit;
+
+      &__icon {
+        @include position(absolute, 14px, null, null, 50%);
+        @include size(14px, 9px);
+        transform: translateX(-50%);
+        fill: $color-tertiary;
+        transition: .3s;
+      }
+
+      &:hover .down-link__icon,
+      &:focus .down-link__icon{
+        fill: $bg-color-el-primary;
+      }
+    }
+
+    @keyframes border-color-changing {
+      from {
+        border-color: transparentize($color-secondary, .8);
+        box-shadow: 0 0 10px 1px transparent inset;
+      }
+      15% {
+        border-color: transparentize($bg-color-el-primary, .8);
+        box-shadow: 0 0 10px 1px $bg-color-el-primary inset;
+      }
+      30% {
+        border-color: transparentize($color-secondary, .8);
+        box-shadow: 0 0 10px 1px transparent inset;
+      }
+      to {
+        border-color: transparentize($color-secondary, .8);
+        box-shadow: 0 0 10px 1px transparent inset;
+      }
+    }
+  }
+
+  &__down-link-wrap {
+    @include position(absolute, null, null, 12%, 50%);
+    transform: translateX(-50%);
+
+    &::before, &::after {
+      content: '';
+      @include size(1px, 783%);
+      transform: translateX(-50%);
+      background-color: transparentize($color-secondary, .8);
+    }
+
+    &::before {
+      @include position(absolute, 100%, 0, 0, 50%);
+    }
+
+    &::after {
+      @include position(absolute, null, null, 100%, 50%);
+    }
+  }
+}
