@@ -37,11 +37,6 @@ $bg-color-inverse: #242424;
   line-height: $line-height;
 }
 
-@function darker($color, $tone) {
-  $adjust: -16*$tone;
-  @return adjust-color($color, $red: $adjust, $green: $adjust, $blue: $adjust);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -176,19 +171,99 @@ body {
   }
 }
 
-.hamburger-toggle {
-  display: none;
+.down-link-wrap {
+  @include size(60px, 60px);
+  @include flexbox-common(flex, center, center);
+  border: 1px solid transparentize($color-secondary, .8);
+  border-radius: 50%;
+  animation: border-color-changing 10s linear 3s infinite;
 
-  &__el {
-    display: block;
-    width: 30px;
-    height: 3px;
+  .down-link {
+    @include position(relative, null, null, null, null);
+    @include size(40px, 40px);
     background-color: $color-secondary;
+    border-radius: inherit;
 
-    &:not(:last-child) {
-      margin-bottom: 7px;
+    &__icon {
+      @include position(absolute, 14px, null, null, 50%);
+      @include size(14px, 9px);
+      transform: translateX(-50%);
+      fill: $color-tertiary;
+      transition: .3s;
+    }
+
+    &:hover .down-link__icon,
+    &:focus .down-link__icon {
+      fill: $bg-color-el-primary;
     }
   }
+
+  @keyframes border-color-changing {
+    from {
+      border-color: transparentize($color-secondary, .8);
+      box-shadow: 0 0 10px 1px transparent inset;
+    }
+    15% {
+      border-color: transparentize($bg-color-el-primary, .8);
+      box-shadow: 0 0 10px 1px $bg-color-el-primary inset;
+    }
+    30% {
+      border-color: transparentize($color-secondary, .8);
+      box-shadow: 0 0 10px 1px transparent inset;
+    }
+    to {
+      border-color: transparentize($color-secondary, .8);
+      box-shadow: 0 0 10px 1px transparent inset;
+    }
+  }
+}
+
+.hamburger-toggle {
+  @include size(30px, 25px);
+  @include flexbox-common(null, space-between, center);
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+
+  &__el {
+    @include size(100%, 3px);
+    background-color: $color-secondary;
+    transition: .3s;
+
+    &:first-child {
+      @include position(relative, 0, null, null, 0);
+    }
+
+    &:last-child {
+      @include position(relative, 0, null, null, 0);
+    }
+  }
+
+  &--active .hamburger-toggle__el {
+    transition: top .15s, transform .15s .15s, opacity .3s;
+  }
+
+  &--active .hamburger-toggle__el:first-child {
+    @include position(null, 11px, null, null, null);
+    transform: rotate(45deg);
+  }
+
+  &--active .hamburger-toggle__el:nth-child(2) {
+    opacity: 0;
+  }
+
+  &--active .hamburger-toggle__el:last-child {
+    @include position(null, -11px, null, null, null);
+    transform: rotate(-45deg);
+  }
+}
+
+.mobile-menu-wrap {
+  display: none;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .header {
@@ -222,21 +297,21 @@ body {
       z-index: 1;
     }
 
-    &-socials-item:not(:last-child){
+    &-socials-item:not(:last-child) {
       margin-bottom: 20px;
     }
   }
 
   &__promo {
     @include position(absolute, 3%, null, null, 50%);
-    @include size(78%, 100%);
+    @include size(88%, 100%);
     transform: translateX(-50%);
 
     &-separator-line {
       margin-bottom: 31px;
     }
 
-    &-links{
+    &-links {
       max-width: 440px;
       @include flexbox-common(flex, space-between, null);
       margin: 0 auto;
@@ -253,8 +328,8 @@ body {
     margin-bottom: 20px;
   }
 
-  .header__btn-book-table,
-  .header__btn-explore {
+  &__btn-book-table,
+  &__btn-explore {
     flex-basis: 200px;
     max-width: 200px;
   }
@@ -320,70 +395,296 @@ body {
     transform: rotate(180deg);
   }
 
-  .down-link-wrap {
-    @include size(60px, 60px);
-    @include flexbox-common(flex, center, center);
-    border: 1px solid transparentize($color-secondary, .8);
-    border-radius: 50%;
-    animation: border-color-changing 10s linear 3s infinite;
-
-    .down-link {
-      @include position(relative, null, null, null, null);
-      @include size(40px, 40px);
-      background-color: $color-secondary;
-      border-radius: inherit;
-
-      &__icon {
-        @include position(absolute, 14px, null, null, 50%);
-        @include size(14px, 9px);
-        transform: translateX(-50%);
-        fill: $color-tertiary;
-        transition: .3s;
-      }
-
-      &:hover .down-link__icon,
-      &:focus .down-link__icon{
-        fill: $bg-color-el-primary;
-      }
-    }
-
-    @keyframes border-color-changing {
-      from {
-        border-color: transparentize($color-secondary, .8);
-        box-shadow: 0 0 10px 1px transparent inset;
-      }
-      15% {
-        border-color: transparentize($bg-color-el-primary, .8);
-        box-shadow: 0 0 10px 1px $bg-color-el-primary inset;
-      }
-      30% {
-        border-color: transparentize($color-secondary, .8);
-        box-shadow: 0 0 10px 1px transparent inset;
-      }
-      to {
-        border-color: transparentize($color-secondary, .8);
-        box-shadow: 0 0 10px 1px transparent inset;
-      }
-    }
-  }
-
   &__down-link-wrap {
     @include position(absolute, null, null, 12%, 50%);
     transform: translateX(-50%);
 
     &::before, &::after {
       content: '';
-      @include size(1px, 783%);
       transform: translateX(-50%);
       background-color: transparentize($color-secondary, .8);
     }
 
     &::before {
       @include position(absolute, 100%, 0, 0, 50%);
+      @include size(1px, 12vh);
     }
 
     &::after {
       @include position(absolute, null, null, 100%, 50%);
+      @include size(1px, calc(88vh - 255px));
     }
+  }
+
+  @media screen and (max-width: 1023px) {
+    &__work-time,
+    &__bottom-socials {
+      display: none;
+    }
+
+    &__top {
+      @include position(fixed, 0, null, null, 0);
+      @include size(100%, 100px);
+      @include flexbox-common(flex, space-around, center);
+      padding: 0 3%;
+      background-color: transparentize($color-tertiary, .5);
+
+      &-nav-mobile {
+        margin-bottom: 40px;
+      }
+    }
+
+    &__logo-wrap {
+      @include position(static, null, null, null, null);
+      transform: translateX(0);
+      padding: 0;
+      z-index: -1;
+
+      &::before, &::after {
+        display: none;
+      }
+
+      .logo-link__img {
+        @include size(80px, 80px);
+      }
+    }
+
+    &__bottom {
+      margin-top: 100px;
+    }
+
+    &__promo {
+      @include position(static, null, null, null, null);
+      @include size(100%, null);
+      transform: translateX(0);
+    }
+
+    &__down-link-wrap {
+      bottom: 50px;
+
+      &::after {
+        @include size(null, calc(100vh - 209px));
+      }
+    }
+
+    .mobile-menu-wrap {
+      display: block;
+      @include position(absolute, 0, null, null, 0);
+      @include size(100%, 100vh);
+      padding: 100px 0 20px 0;
+      background-color: transparentize($color-tertiary, .1);
+      opacity: 0;
+      overflow-y: scroll;
+      visibility: hidden;
+      transition: .3s;
+
+      &--active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &--active .mobile-menu-wrap__content {
+        transform: translateY(0) scaleY(1);
+        opacity: 1;
+      }
+
+      &__content {
+        width: inherit;
+        @include flexbox-common(flex, null, center);
+        flex-direction: column;
+        transform: translateY(-30%) scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        transition: .7s;
+      }
+
+      .nav-mobile {
+        @include size(50%, null);
+      }
+
+      .menu-mobile__item:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      .menu-mobile-link {
+        @include font(null, 20px, 24px, bold);
+        @include flexbox-common(flex, center, center);
+        padding: 5px 0 8px 0;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $color-secondary;
+        border-bottom: 1px solid transparentize($bg-color-el-primary, .5);
+        transition: .3s;
+
+        &:focus {
+          color: $bg-color-el-primary;
+          border-color: $bg-color-el-primary;
+        }
+      }
+
+      &__work-time {
+        @include font(null, 16px, 20px, null);
+        margin-bottom: 35px;
+      }
+
+      &__socials {
+        @include flexbox-common(flex, space-between, center);
+        @include size(30%, null);
+      }
+    }
+
+    .nav {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    &__top {
+      @include size(null, 70px);
+    }
+
+    &__logo-wrap {
+      .logo-link__img {
+        @include size(50px, 50px);
+      }
+    }
+
+    &__bottom {
+      @include size(null, calc(100% - 70px));
+      margin-top: 70px;
+    }
+
+    &__promo-links {
+      max-width: 340px;
+    }
+
+    &__down-link-wrap {
+      &::after {
+        @include size(null, calc(100vh - 179px));
+      }
+    }
+
+    &__btn-book-table,
+    &__btn-explore {
+      flex-basis: 150px;
+      max-width: 150px;
+    }
+
+    .mobile-menu-wrap {
+      padding-top: 70px;
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    &__down-link-wrap {
+      &::after {
+        @include size(null, calc(100vh - 169px));
+      }
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    &__promo-links {
+      max-width: 260px;
+    }
+
+    &__btn-book-table,
+    &__btn-explore {
+      flex-basis: 120px;
+      max-width: 120px;
+    }
+
+    .mobile-menu-wrap {
+
+      .nav-mobile {
+        @include size(80%, null);
+      }
+
+      &__socials {
+        @include size(50%, null);
+      }
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    &__top {
+      @include flexbox-common(null, space-between, null);
+    }
+
+    .mobile-menu-wrap {
+
+      &__work-time {
+        @include font(null, 12px, null, null);
+        margin-bottom: 30px;
+      }
+
+      &__socials {
+        @include size(60%, null);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1365px) {
+  .container {
+    max-width: 94%;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .hamburger-toggle {
+    @include flexbox-common(flex, null, null);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .title-main {
+    font-size: 75px;
+  }
+
+  .btn {
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .title-main {
+    font-size: 60px;
+  }
+
+  .down-link-wrap {
+    @include size(50px, 50px);
+
+    .down-link {
+      @include size(30px, 30px);
+
+      &__icon {
+        top: 10px;
+      }
+    }
+  }
+
+  .social-link {
+    @include size(50px, 50px);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .title-main {
+    font-size: 42px;
+  }
+
+  .title-mini {
+    font-size: 10px;
+  }
+
+  .btn {
+    height: 33px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .title-main {
+    font-size: 37px;
   }
 }
