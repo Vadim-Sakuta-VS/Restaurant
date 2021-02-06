@@ -462,6 +462,11 @@ body {
     &__down-link-wrap {
       bottom: 50px;
 
+      &::before {
+        @include position(absolute, 100%, 0, 0, 50%);
+        @include size(1px, 50px);
+      }
+
       &::after {
         @include size(null, calc(100vh - 209px));
       }
