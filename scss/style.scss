@@ -759,10 +759,13 @@ body {
 
 
 .team {
-  @include position(relative, null, null, null, null);
-  padding: 43px 0 100px 0;
   background: no-repeat center center / cover url("../images/team-bg.png") #242424;
   color: $color-secondary;
+
+  &__container {
+    padding: 43px 0 100px 0;
+    @include position(relative, null, null, null, null);
+  }
 
   &__title-mini {
     margin-bottom: 43px;
@@ -777,7 +780,9 @@ body {
   }
 
   @media screen and (max-width: 850px) {
-    padding: 25px 0 50px 0;
+    &__container {
+      padding: 25px 0 50px 0;
+    }
 
     &__title-mini {
       margin-bottom: 25px;
@@ -804,7 +809,9 @@ body {
   }
 
   @media screen and (max-width: 540px) {
-    padding: 25px 0;
+    &__container {
+      padding: 25px 0;
+    }
   }
 
   @media screen and (max-width: 380px) {
