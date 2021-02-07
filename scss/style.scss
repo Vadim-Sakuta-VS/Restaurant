@@ -121,11 +121,58 @@ body {
   @include font(null, 12px, 14px, bold);
   letter-spacing: 0.5em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .title-main {
-  @include font($ff-title, 96px, null, bold);
+  @include font($ff-title, 96px, null, null);
   text-transform: uppercase;
+  text-align: center;
+}
+
+.title {
+  @include font($ff-title, 36px, 48px, null);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.description {
+  @include font(null, 18px, 28px, bold);
+  text-align: center;
+}
+
+.text {
+  @include font(null, 14px, 24px, null);
+  text-align: center;
+}
+
+.col-bg {
+  @include position(relative, null, null, null, null);
+  @include flexbox-common(flex, null, null);
+
+  &::before {
+    content: '';
+    @include position(absolute, 50%, 0, null, null);
+    @include size(41.668%, 52.632%);
+    transform: translateY(-50%);
+    border: 20px solid $bg-color-el-primary;
+    border-radius: 5px;
+    box-shadow: 0 0 100px transparentize($color-primary, .5);
+    box-sizing: border-box;
+    z-index: 1;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+
+  &__img {
+    flex-basis: 79.168%;
+    padding-top: 79.169%;
+    background: no-repeat center center / contain;
+    border-radius: 5px;
+    box-shadow: 0 0 50px transparentize($color-primary, .5);
+  }
 }
 
 .separator-line {
@@ -319,12 +366,10 @@ body {
   }
 
   &__title-mini {
-    text-align: center;
     margin-bottom: 6px;
   }
 
   &__title-main {
-    text-align: center;
     margin-bottom: 20px;
   }
 
@@ -627,6 +672,38 @@ body {
         @include size(60%, null);
       }
     }
+  }
+}
+
+.about-us {
+  padding: 100px 0;
+
+  &__container {
+    @include flexbox-common(flex, center, center);
+  }
+
+  &__col {
+    flex-basis: 600px;
+
+    &:last-child {
+      margin-left: 80px;
+    }
+
+    &-bg-img {
+      background-image: url("../images/about-img.png");
+    }
+  }
+
+  &__title {
+    margin-bottom: 12px;
+  }
+
+  &__separator-line {
+    margin-bottom: 16px;
+  }
+
+  &__description {
+    margin-bottom: 15px;
   }
 }
 
