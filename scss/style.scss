@@ -705,6 +705,54 @@ body {
   &__description {
     margin-bottom: 15px;
   }
+
+  @media screen and (max-width: 850px) {
+    padding: 50px 0;
+  }
+
+  @media screen and (max-width: 660px) {
+    &__container {
+      flex-wrap: wrap;
+    }
+
+    &__col {
+      flex-basis: 100%;
+
+      &:first-child{
+        margin-bottom: 30px;
+      }
+
+      &:last-child {
+        flex-basis: 70%;
+        margin-left: 14%;
+      }
+    }
+
+    &__title {
+      margin-bottom: 9px;
+    }
+
+    &__separator-line {
+      margin-bottom: 12px;
+    }
+
+    &__description {
+      margin-bottom: 11px;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    padding: 25px 0;
+  }
+
+  @media screen and (max-width: 380px) {
+    &__col {
+      &:last-child {
+        flex-basis: 80%;
+        margin-left: 12%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1365px) {
@@ -727,6 +775,21 @@ body {
   .btn {
     height: 50px;
   }
+
+  .col-bg {
+
+    &::before {
+      border-width: 10px;
+    }
+  }
+
+  .title {
+    @include font(null, 28px, 40px, null);
+  }
+
+  .description {
+    @include font(null, 16px, 26px, null);
+  }
 }
 
 @media screen and (max-width: 660px) {
@@ -748,6 +811,14 @@ body {
 
   .social-link {
     @include size(50px, 50px);
+  }
+
+  .title {
+    @include font(null, 24px, 36px, null);
+  }
+
+  .description {
+    @include font(null, 15px, 25px, null);
   }
 }
 
