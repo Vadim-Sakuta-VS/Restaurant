@@ -446,7 +446,7 @@ body {
 
   &__down-link-block {
     @include position(absolute, null, null, 0, 0);
-    @include size(100%, calc(100vh - 195px));
+    @include size(100%, calc(100% - 195px));
     overflow: hidden;
   }
 
@@ -514,7 +514,7 @@ body {
     }
 
     &__down-link-block {
-      @include size(100%, calc(100vh - 100px));
+      @include size(100%, calc(100% - 100px));
     }
 
     &__down-link-wrap {
@@ -613,7 +613,7 @@ body {
     }
 
     &__down-link-block {
-      @include size(100%, calc(100vh - 70px));
+      @include size(100%, calc(100% - 70px));
     }
 
     &__btn-book-table,
