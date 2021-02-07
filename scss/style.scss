@@ -444,24 +444,29 @@ body {
     transform: rotate(180deg);
   }
 
+  &__down-link-block {
+    @include position(absolute, null, null, 0, 0);
+    @include size(100%, calc(100vh - 195px));
+    overflow: hidden;
+  }
+
   &__down-link-wrap {
     @include position(absolute, null, null, 12%, 50%);
     transform: translateX(-50%);
 
     &::before, &::after {
       content: '';
+      @include size(1px, 100vh);
       transform: translateX(-50%);
       background-color: transparentize($color-secondary, .8);
     }
 
     &::before {
-      @include position(absolute, 100%, 0, 0, 50%);
-      @include size(1px, 12vh);
+      @include position(absolute, 100%, null, null, 50%);
     }
 
     &::after {
       @include position(absolute, null, null, 100%, 50%);
-      @include size(1px, calc(88vh - 255px));
     }
   }
 
@@ -508,17 +513,12 @@ body {
       transform: translateX(0);
     }
 
+    &__down-link-block {
+      @include size(100%, calc(100vh - 100px));
+    }
+
     &__down-link-wrap {
       bottom: 50px;
-
-      &::before {
-        @include position(absolute, 100%, 0, 0, 50%);
-        @include size(1px, 50px);
-      }
-
-      &::after {
-        @include size(null, calc(100vh - 209px));
-      }
     }
 
     .mobile-menu-wrap {
@@ -612,10 +612,8 @@ body {
       max-width: 340px;
     }
 
-    &__down-link-wrap {
-      &::after {
-        @include size(null, calc(100vh - 179px));
-      }
+    &__down-link-block {
+      @include size(100%, calc(100vh - 70px));
     }
 
     &__btn-book-table,
